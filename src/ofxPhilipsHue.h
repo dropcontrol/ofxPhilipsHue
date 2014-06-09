@@ -36,6 +36,9 @@ public:
     void setHue(int hue);
     
     void setBri(int bri);
+    
+    bool getIsOn();
+    
 };
 
 #endif /* defined(__philipsHueTest__ofxPhilipsHue__) */

@@ -96,3 +96,10 @@ void ofxPhilipsHue::setBri(int bri){
     
     
 }
+
+bool ofxPhilipsHue::getIsOn(){
+
+    return isOn;
+    
+}
+
