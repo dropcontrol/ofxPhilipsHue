@@ -23,8 +23,6 @@ public:
     
     ofxPanel gui;
     ofxColorSlider colorSlider;
-//    ofxToggle filled;
-//    ofxIntSlider bri;
 
     ofParameter<ofColor> color;
     
@@ -32,6 +30,5 @@ public:
     
 private:    
     
-//    void changeBrightness(ofParameter<ofColor> color);
 
 };

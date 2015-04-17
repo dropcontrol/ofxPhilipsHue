@@ -1,30 +1,20 @@
 #include "ofApp.h"
 
+int current_red = 0;
+int current_green = 0;
+int current_blue = 0;
+int current_brightness = 0;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
     
     gui.setup(); // most of the time you don't need a name
-//    gui.add(bri.setup("brightness", 0, 0, 254));
-//    bri.addListener(this, &ofApp::changeBrightness);
-//    gui.add(filled.setup("on/off", true));
     gui.add(colorSlider.setup("color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
-    
     
     hue1.setup("192.168.100.130", "newdeveloper", 1);
     
 }
-
-//void ofApp::changeBrightness(ofParameter<ofColor> color) {
-//    
-//    ofLog(OF_LOG_NOTICE, "%d", (int)color->getBrightness());
-//    hue1.setBri((int)color->getBrightness());
-//    
-//}
-
-//
-// http://ja.wikipedia.org/wiki/HSV色空間
-//
 
 int getHue(float r, float g, float b) {
     float max = MAX(MAX(r, g), b);
@@ -71,17 +61,33 @@ void ofApp::update(){
 void ofApp::draw(){
     
     color = colorSlider;
-    ofLog(OF_LOG_NOTICE, "r: %d", (int)color->r);
-    ofLog(OF_LOG_NOTICE, "g: %d", (int)color->g);
-    ofLog(OF_LOG_NOTICE, "b: %d", (int)color->b);
-//    ofLog(OF_LOG_NOTICE, "a: %d", (int)color->a);
     
-    hue1.setBri(color->getBrightness());
-
-//    hue1.setHue(getHue(color->r, color->g, color->b));
-    hue1.setHue(2000);
+    if (current_red != (int)color->r){
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        current_red = color->r;
+    }
     
-    int hoge = getHue(color->r, color->g, color->b);
+    if (current_green != (int)color->g){
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        current_green = color->g;
+    }
+    
+    if (current_red != (int)color->b) {
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        current_blue = color->b;
+    }
+    
+    if (current_brightness != color->getBrightness()) {
+        hue1.setBri(color->getBrightness());
+        current_brightness = color -> getBrightness();
+    }
+    
+    ofLog(OF_LOG_NOTICE, "red: %d", current_red);
+    ofLog(OF_LOG_NOTICE, "green: %d", current_green);
+    ofLog(OF_LOG_NOTICE, "blue: %d", current_blue);
+    ofLog(OF_LOG_NOTICE, "brightness: %d", current_brightness);
+    
+    int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555);
     ofLog(OF_LOG_NOTICE, "the number is " + ofToString(hoge));
     
     gui.draw();
