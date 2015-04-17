@@ -66,17 +66,17 @@ void ofApp::draw(){
     color = colorSlider;
     
     if (current_red != (int)color->r){
-        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
         current_red = color->r;
     }
     
     if (current_green != (int)color->g){
-        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
         current_green = color->g;
     }
     
     if (current_red != (int)color->b) {
-        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555));
+        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
         current_blue = color->b;
     }
     
@@ -99,7 +99,7 @@ void ofApp::draw(){
     ofLog(OF_LOG_NOTICE, "blue: %d", current_blue);
     ofLog(OF_LOG_NOTICE, "brightness: %d", current_brightness);
     
-    int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555);
+    int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535);
     ofLog(OF_LOG_NOTICE, "the number is " + ofToString(hoge));
     
     ofLog(OF_LOG_NOTICE, "isOn: %d", current_lightOn);
