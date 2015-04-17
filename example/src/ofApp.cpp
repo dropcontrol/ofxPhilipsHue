@@ -1,8 +1,6 @@
 #include "ofApp.h"
 
-int current_red = 0;
-int current_green= 0;
-int current_blue = 0;
+int current_hue = 0;
 int current_saturation = 0;
 int current_brightness = 0;
 bool current_lightOn = true;
@@ -12,7 +10,7 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
     
     gui.setup(); // most of the time you don't need a name
-    gui.add(colorSlider.setup("color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
+    gui.add(colorSlider.setup("color",ofColor(100,100,100),ofColor(0,0),ofColor(255,255)));
     gui.add(light.setup("light", true));
 
     hue1.setup("192.168.100.130", "newdeveloper", 1);
@@ -23,7 +21,7 @@ void ofApp::setup(){
 int getHue(float r, float g, float b) {
     float max = MAX(MAX(r, g), b);
     float min = MIN(MIN(r, g), b);
-
+    
     float h;
     
     if (min == max) {
@@ -32,7 +30,7 @@ int getHue(float r, float g, float b) {
         h = 60 * ((g - b) / (max - min));
     } else if (max == g) {
         h = 60 * ((b - r) / (max - min)) + 120;
-    } else if (min == b) {
+    } else if (max == b) {
         h = 60 * ((r - g) / (max - min)) + 240;
     }
                 
@@ -66,22 +64,12 @@ void ofApp::draw(){
     
     color = colorSlider;
     
-    // set hue
-    if (current_red != (int)color->r){
+
+    if (current_hue != ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535)) {
         hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
-        current_red = color->r;
+        current_hue = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535);
     }
-    
-    if (current_green != (int)color->g){
-        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
-        current_green = color->g;
-    }
-    
-    if (current_red != (int)color->b) {
-        hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
-        current_blue = color->b;
-    }
-    
+
     // set brightness
     if (current_brightness != color->getBrightness()) {
         hue1.setBri(color->getBrightness());
@@ -89,7 +77,7 @@ void ofApp::draw(){
     }
     
     // set saturation
-    if (current_saturation != getSaturation(color->r, color->g, color->b)) {
+    if (current_saturation != (int)getSaturation(color->r, color->g, color->b)) {
         hue1.setSat(getSaturation(color->r, color->g, color->b));
         current_saturation = getSaturation(color->r, color->g, color->b);
     }
@@ -104,14 +92,14 @@ void ofApp::draw(){
     }
     
     // Debug
-    ofLog(OF_LOG_NOTICE, "red: %d", current_red);
-    ofLog(OF_LOG_NOTICE, "green: %d", current_green);
-    ofLog(OF_LOG_NOTICE, "blue: %d", current_blue);
+    ofLog(OF_LOG_NOTICE, "red: %d", color->r);
+    ofLog(OF_LOG_NOTICE, "green: %d", color->g);
+    ofLog(OF_LOG_NOTICE, "blue: %d", color->b);
     ofLog(OF_LOG_NOTICE, "brightness: %d", current_brightness);
     ofLog(OF_LOG_NOTICE, "saturation: %d", current_saturation);
     
     int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535);
-    ofLog(OF_LOG_NOTICE, "the number is " + ofToString(hoge));
+    ofLog(OF_LOG_NOTICE, "hue: " + ofToString(hoge));
     
     ofLog(OF_LOG_NOTICE, "isOn: %d", current_lightOn);
     
