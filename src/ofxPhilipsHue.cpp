@@ -68,7 +68,6 @@ void ofxPhilipsHue::setHue(int hue){
     
     httpUtils.putData(actionUrl, buff, "application/json");
     
-    
 }
 
 void ofxPhilipsHue::setBri(int bri){
@@ -92,9 +91,32 @@ void ofxPhilipsHue::setBri(int bri){
     ofBuffer buff;
     buff.set(sendData.c_str(), sendData.size());
     
-    ofLog(OF_LOG_NOTICE, "setBri: %d", bri);
     httpUtils.putData(actionUrl, buff, "application/json");
     
+}
+
+void ofxPhilipsHue::setSat(int sat){
+    
+    if(sat > 255)
+        sat = 255;
+    if(sat < 0)
+        sat = 0;
+    
+    
+    string actionUrl = lightUrl + "state/";
+    
+    
+    stringstream input;
+    
+    input << "{\"sat\":" <<sat<< "}";
+    
+    
+    string sendData = input.str();
+    
+    ofBuffer buff;
+    buff.set(sendData.c_str(), sendData.size());
+    
+    httpUtils.putData(actionUrl, buff, "application/json");
     
 }
 

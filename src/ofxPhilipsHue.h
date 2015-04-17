@@ -37,6 +37,8 @@ public:
     
     void setBri(int bri);
     
+    void setSat(int sat);
+    
     bool getIsOn();
     
 };

@@ -3,6 +3,7 @@
 int current_red = 0;
 int current_green= 0;
 int current_blue = 0;
+int current_saturation = 0;
 int current_brightness = 0;
 bool current_lightOn = true;
 
@@ -65,6 +66,7 @@ void ofApp::draw(){
     
     color = colorSlider;
     
+    // set hue
     if (current_red != (int)color->r){
         hue1.setHue(ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535));
         current_red = color->r;
@@ -80,11 +82,19 @@ void ofApp::draw(){
         current_blue = color->b;
     }
     
+    // set brightness
     if (current_brightness != color->getBrightness()) {
         hue1.setBri(color->getBrightness());
         current_brightness = color -> getBrightness();
     }
     
+    // set saturation
+    if (current_saturation != getSaturation(color->r, color->g, color->b)) {
+        hue1.setSat(getSaturation(color->r, color->g, color->b));
+        current_saturation = getSaturation(color->r, color->g, color->b);
+    }
+    
+    // set light on
     if (light && !hue1.getIsOn()) {
         hue1.setLightOn(true);
         current_lightOn = true;
@@ -98,6 +108,7 @@ void ofApp::draw(){
     ofLog(OF_LOG_NOTICE, "green: %d", current_green);
     ofLog(OF_LOG_NOTICE, "blue: %d", current_blue);
     ofLog(OF_LOG_NOTICE, "brightness: %d", current_brightness);
+    ofLog(OF_LOG_NOTICE, "saturation: %d", current_saturation);
     
     int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 65535);
     ofLog(OF_LOG_NOTICE, "the number is " + ofToString(hoge));
