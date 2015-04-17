@@ -1,7 +1,7 @@
 ofxPhilipsHue
 =============
 
-oF addon for Philips Hue
+oF addon for Philips Hue  
 this addon was forked from RyotaKatoh/ofxPhilipsHue.
 
 Dependencies
