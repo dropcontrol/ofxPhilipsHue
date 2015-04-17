@@ -1,9 +1,9 @@
 #include "ofApp.h"
 
-int current_hue = 0;
-int current_saturation = 0;
-int current_brightness = 0;
-bool current_lightOn = true;
+int current_hue;
+int current_saturation;
+int current_brightness;
+bool current_lightOn;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -18,6 +18,7 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
+// http://www.peko-step.com/tool/hsvrgb.html
 int getHue(float r, float g, float b) {
     float max = MAX(MAX(r, g), b);
     float min = MIN(MIN(r, g), b);
@@ -44,9 +45,7 @@ int getHue(float r, float g, float b) {
 int getSaturation(float r, float g, float b) {
     float min = MIN(MIN(r, g), b);
     float max = MAX(MAX(r, g), b);
-    float delta = max-min;
-    if (max!=0) return int(delta/max*255);
-    return 0;
+    return int((max - min) / max * 255);
 }
 
 int getBrightness(float r, float g, float b) {
