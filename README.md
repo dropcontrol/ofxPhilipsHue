@@ -2,13 +2,10 @@ ofxPhilipsHue
 =============
 
 oF addon for Philips Hue
+this addon was forked from RyotaKatoh/ofxPhilipsHue.
 
-Dependencies 
+Dependencies
 =============
 ofxJson - https://github.com/jefftimesten/ofxJSON  
-my ofxHttpUtil - https://github.com/RyotaKatoh/ofxHttpUtils
-
-To Do
-=============
-add example  
-add some effects
+ofxHttpUtil - https://github.com/arturoc/ofxHttpUtils  
+ofxHttpUtilPlus - https://github.com/dropcontrol/ofxHttpUtilsPlus

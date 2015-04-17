@@ -13,7 +13,7 @@
 
 #include "ofMain.h"
 
-#include "ofxHttpUtils.h"
+#include "ofxHttpUtilsPlus.h"
 #include "ofxJSONElement.h"
 
 class ofxPhilipsHue{
@@ -22,7 +22,7 @@ class ofxPhilipsHue{
     
     bool    isOn;
     
-    ofxHttpUtils httpUtils;
+    ofxHttpUtilsPlus httpUtils;
     
     ofxJSONElement response;
     

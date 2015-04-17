@@ -92,6 +92,7 @@ void ofxPhilipsHue::setBri(int bri){
     ofBuffer buff;
     buff.set(sendData.c_str(), sendData.size());
     
+    ofLog(OF_LOG_NOTICE, "setBri: %d", bri);
     httpUtils.putData(actionUrl, buff, "application/json");
     
     
