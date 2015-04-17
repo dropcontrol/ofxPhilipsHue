@@ -23,12 +23,12 @@ public:
     
     ofxPanel gui;
     ofxColorSlider colorSlider;
+    ofxToggle light;
 
     ofParameter<ofColor> color;
     
     ofxPhilipsHue hue1;
     
-private:    
-    
+private:
 
 };

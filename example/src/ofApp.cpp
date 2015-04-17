@@ -1,9 +1,10 @@
 #include "ofApp.h"
 
 int current_red = 0;
-int current_green = 0;
+int current_green= 0;
 int current_blue = 0;
 int current_brightness = 0;
+bool current_lightOn = true;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -11,11 +12,13 @@ void ofApp::setup(){
     
     gui.setup(); // most of the time you don't need a name
     gui.add(colorSlider.setup("color",ofColor(100,100,140),ofColor(0,0),ofColor(255,255)));
-    
+    gui.add(light.setup("light", true));
+
     hue1.setup("192.168.100.130", "newdeveloper", 1);
     
 }
 
+//--------------------------------------------------------------
 int getHue(float r, float g, float b) {
     float max = MAX(MAX(r, g), b);
     float min = MIN(MIN(r, g), b);
@@ -82,6 +85,15 @@ void ofApp::draw(){
         current_brightness = color -> getBrightness();
     }
     
+    if (light && !hue1.getIsOn()) {
+        hue1.setLightOn(true);
+        current_lightOn = true;
+    } else if (!light && hue1.getIsOn()) {
+        hue1.setLightOn(false);
+        current_lightOn = false;
+    }
+    
+    // Debug
     ofLog(OF_LOG_NOTICE, "red: %d", current_red);
     ofLog(OF_LOG_NOTICE, "green: %d", current_green);
     ofLog(OF_LOG_NOTICE, "blue: %d", current_blue);
@@ -89,6 +101,8 @@ void ofApp::draw(){
     
     int hoge = ofMap(getHue(color->r, color->g, color->b), 0, 360, 0, 63555);
     ofLog(OF_LOG_NOTICE, "the number is " + ofToString(hoge));
+    
+    ofLog(OF_LOG_NOTICE, "isOn: %d", current_lightOn);
     
     gui.draw();
 

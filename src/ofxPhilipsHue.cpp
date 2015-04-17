@@ -20,20 +20,20 @@ void ofxPhilipsHue::setup(string ipAddress, string appName, int lightNumber){
     
 }
 
-void ofxPhilipsHue::setLightOn(){
+void ofxPhilipsHue::setLightOn(bool lightOn){
 
     string actionUrl = lightUrl + "state/";
     
     
     stringstream input;
     
-    if(isOn){
+    if(isOn && !lightOn){
         input << "{\"transitiontime\": 0, \"on\": false}";
         isOn = false;
     }
-    else{
+    else if (lightOn) {
         input << "{\"transitiontime\": 0, \"on\": true}";
-        isOn = true;
+        isOn = true;            
     }
     
     string sendData = input.str();

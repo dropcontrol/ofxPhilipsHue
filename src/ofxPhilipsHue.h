@@ -31,7 +31,7 @@ public:
 
     void setup(string ipAdress, string appName, int lightNumber);
     
-    void setLightOn();
+    void setLightOn(bool lightOn);
     
     void setHue(int hue);
     
