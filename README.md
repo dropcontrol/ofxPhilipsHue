@@ -1,3 +1,6 @@
+I had remake this addon to  
+https://github.com/dropcontrol/ofxPhilipsHueApi
+
 ofxPhilipsHue
 =============
 
